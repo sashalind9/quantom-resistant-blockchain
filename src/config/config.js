@@ -57,6 +57,49 @@ const config = {
     maxRewardAge: 100, // Maximum number of blocks to claim rewards
   },
 
+  // Sharding parameters
+  sharding: {
+    enabled: true,
+    totalShards: 16,
+    minShardsActive: 4,
+    maxShardsPerValidator: 2,
+    minValidatorsPerShard: 4,
+    maxValidatorsPerShard: 100,
+    shardRotationInterval: 10000, // blocks
+    crossShardTimeout: 300000, // 5 minutes
+    maxCrossShardTxPerBlock: 100,
+    minCrossShardConfirmations: 12,
+    shardSyncInterval: 1000, // 1 second
+    maxShardSize: 1000000000000, // 1TB
+    shardRebalanceThreshold: 0.2, // 20% size difference
+    maxShardRebalanceSize: 100000000, // 100MB per rebalance
+    crossShardCommitteSize: 10,
+    shardConsensusThreshold: 0.67, // 67% agreement needed
+    maxShardBlockSize: 500000, // 500KB
+    maxShardTransactionsPerBlock: 1000,
+    shardBlockTime: 5000, // 5 seconds
+    crossShardVerificationLevels: 3,
+    shardStateVerificationInterval: 100, // blocks
+    maxPendingCrossShardTx: 10000,
+    shardGossipInterval: 1000, // 1 second
+    maxShardGossipBatch: 1000,
+    shardMetricsInterval: 60000, // 1 minute
+    defaultGasLimitPerShard: 10000000,
+    crossShardGasMultiplier: 2,
+    shardValidatorReward: 25, // per block
+    crossShardValidatorReward: 10, // per transaction
+    shardDataRetentionPeriod: 2592000000, // 30 days
+    maxShardChainReorg: 100, // blocks
+    shardP2PProtocolVersion: 1,
+    shardConsensusProtocolVersion: 1,
+    shardStorageFormat: "leveldb",
+    shardBackupInterval: 86400, // 1 day in blocks
+    maxShardBackupSize: 1000000000, // 1GB
+    crossShardMessageFormat: "protobuf",
+    shardValidatorUpdateInterval: 100, // blocks
+    maxShardValidatorInactivity: 86400, // 1 day in blocks
+  },
+
   // Smart Contract parameters
   contracts: {
     maxCodeSize: 500000, // 500KB
@@ -160,6 +203,10 @@ if (process.env.NODE_ENV === "test") {
   config.development.testMode = true;
   config.contracts.executionTimeout = 1000;
   config.contracts.maxGasLimit = 1000000;
+  config.sharding.totalShards = 4;
+  config.sharding.minValidatorsPerShard = 2;
+  config.sharding.shardBlockTime = 1000;
+  config.sharding.crossShardTimeout = 30000;
 }
 
 // Export configuration
