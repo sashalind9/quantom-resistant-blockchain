@@ -2,7 +2,7 @@ const Blockchain = require("./blockchain/Blockchain");
 const P2PServer = require("./network/P2PServer");
 const APIServer = require("./api/APIServer");
 const { Mempool } = require("./mempool/Mempool");
-const { LevelDB } = require("./storage/LevelDB");
+// const { LevelDB } = require("./storage/LevelDB");
 const winston = require("winston");
 
 // Configure logging
