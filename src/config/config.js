@@ -57,6 +57,32 @@ const config = {
     maxRewardAge: 100, // Maximum number of blocks to claim rewards
   },
 
+  // Smart Contract parameters
+  contracts: {
+    maxCodeSize: 500000, // 500KB
+    maxGasLimit: 10000000,
+    executionTimeout: 5000, // 5 seconds
+    maxStateSize: 1000000, // 1MB
+    maxContractsPerBlock: 50,
+    maxCallDataSize: 100000, // 100KB
+    minGasPrice: 0.00001,
+    maxStackDepth: 1024,
+    maxMemoryUsage: 100 * 1024 * 1024, // 100MB
+    maxContractCalls: 100, // Per transaction
+    upgradeGracePeriod: 86400000, // 24 hours
+    contractAuditRequired: true,
+    allowedContractLanguages: ["javascript"],
+    prohibitedOperations: ["eval", "Function", "require", "process", "__proto__", "constructor["],
+    defaultGasCosts: {
+      base: 21000,
+      dataWrite: 20000,
+      dataRead: 5000,
+      computation: 1,
+      memory: 1,
+      storage: 100,
+    },
+  },
+
   // P2P network parameters
   p2p: {
     maxPeers: 50,
@@ -132,6 +158,8 @@ if (process.env.NODE_ENV === "test") {
   config.storage.dbPath = path.join(process.cwd(), ".blockchain-test");
   config.p2p.pingInterval = 5000;
   config.development.testMode = true;
+  config.contracts.executionTimeout = 1000;
+  config.contracts.maxGasLimit = 1000000;
 }
 
 // Export configuration
